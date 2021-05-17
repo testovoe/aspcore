@@ -37,6 +37,15 @@ namespace Testovoe.Controllers
             return _testAppDbContext.UserTimes.AsEnumerable();
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        public string Clear()
+        {
+            _testAppDbContext.UserTimes.RemoveRange(_testAppDbContext.UserTimes.Select(x => x).AsEnumerable());
+            _testAppDbContext.SaveChanges();
+            return "Ok";
+        }
+
         [HttpPost]
         public ActionResult Post(IEnumerable<UserTime> userTimes)
         {
